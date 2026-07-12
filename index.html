@@ -1940,7 +1940,7 @@
                       <span class="ln">4</span>&nbsp;&nbsp;<span class="fn"
                         >vibe</span
                       ><span class="pn">: </span
-                      ><span class="sr">"system thinker"</span
+                      ><span class="sr">"code & creativity"</span
                       ><span class="pn">,</span>
                     </div>
                     <div class="cl">
@@ -2403,14 +2403,16 @@
           org: "Institute of Electrical and Electronics Engineers (IEEE) - SSUET Student Branch",
           role: "Chairperson",
           yr: "2025–2026",
-          d: "Managed branch activities, student teams, technical events, seminars, and leadership initiatives.",
+          d: "Managed branch activities, student teams, technical seminars, and leadership initiatives.",
+          link: "https://www.linkedin.com/feed/update/urn:li:activity:7448280760786210816/",
         },
         {
           i: "fa-solid fa-users",
-          org: "Association for Computing Machinery (ACM) - SSUET",
+          org: "Association for Computing Machinery (ACM) - SSUET Student Chapter",
           role: "Chairperson",
           yr: "2024–2025",
-          d: "Led the university computing society and organized workshops, events, and technology initiatives.",
+          d: "Led the university computing society and organized workshops, coding competitions, and industry collaborations.",
+          link: "https://www.linkedin.com/posts/acm-ssuet-student-chapter-2024-2025-tenure-ugcPost-7319405461726756864-jcib/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC_5oggBW78ZQVhMyjzKRtQPyoudUwha_VE",
         },
         {
           i: "fa-brands fa-google",
@@ -2418,6 +2420,7 @@
           role: "Community Lead → Mentor",
           yr: "2023–2025",
           d: "Led and mentored student developers while organizing technical events and promoting emerging technologies.",
+          link: "https://www.linkedin.com/feed/update/urn:li:activity:7165750844267728896/",
         },
         {
           i: "fa-solid fa-star",
@@ -2442,10 +2445,10 @@
         */
         {
           i: "fa-solid fa-certificate",
-          org: "Cisco Networking Academy",
+          org: "AI Certification (Cisco NetAcad)",
           role: "Introduction to Modern AI",
           yr: "2026",
-          d: "Completed foundational training in modern AI concepts including Machine Learning, LLMs, prompt engineering, multimodal AI, and real-world applications like chatbots.",
+          d: "Completed foundational training in modern AI concepts including Machine Learning, LLMs, prompt engineering, multimodal AI, and chatbots.",
           proofs: ["images/IntrotoModernAICertificate.png"],
         },
       ];
@@ -2503,9 +2506,17 @@
     <p>${a.d}</p>
 
     ${
+      a.link? `<a
+         href="${a.link}" target="_blank" rel="noopener noreferrer" class="btn btn-ghost" style="margin-top:12px; padding:8px 14px;">
+         <i class="fa-solid fa-eye"></i> view_details()
+       </a>`
+        : ""
+    }
+
+    ${
       a.proofs?.length
         ? `<button class="btn btn-ghost preview-btn" data-files='${JSON.stringify(a.proofs)}' style="margin-top:12px; padding:8px 14px;">
-        <i class="fa-solid fa-eye"></i> view_proof()
+        <i class="fa-solid fa-eye"></i> view_details()
       </button>`
         : ""
     }
