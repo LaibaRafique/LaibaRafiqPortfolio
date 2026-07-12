@@ -107,6 +107,17 @@
           opacity 0.2s;
       }
 
+      /* ── On touch devices, cursor starts hidden and fades in/out on tap ── */
+      @media (hover: none) and (pointer: coarse) {
+        #cur,
+        #cur-r {
+          opacity: 0;
+          transition:
+            opacity 0.35s ease,
+            transform 0.08s;
+        }
+      }
+
       /* ── Global dot-grid texture ── */
       body::before {
         content: "";
@@ -2568,15 +2579,15 @@
       );
 
       document.addEventListener("click", (e) => {
-          if (
-            nl.classList.contains("op") &&
-            !nl.contains(e.target) &&
-            !hbg.contains(e.target)
-          ) {
-            hbg.classList.remove("op");
-            nl.classList.remove("op");
-            hbg.setAttribute("aria-expanded", "false");
-          }
+        if (
+          nl.classList.contains("op") &&
+          !nl.contains(e.target) &&
+          !hbg.contains(e.target)
+        ) {
+          hbg.classList.remove("op");
+          nl.classList.remove("op");
+          hbg.setAttribute("aria-expanded", "false");
+        }
       });
 
       /* ── Scroll-to-top ── */
@@ -2647,6 +2658,39 @@
         mx = e.clientX;
         my = e.clientY;
       });
+
+      /* ── Touch support: show cursor on tap/drag, fade after a pause ── */
+      let curHideTimer;
+      function showCursorAt(x, y) {
+        mx = x;
+        my = y;
+        rx = x;
+        ry = y;
+        cur.style.opacity = "1";
+        ring.style.opacity = ".45";
+        clearTimeout(curHideTimer);
+        curHideTimer = setTimeout(() => {
+          cur.style.opacity = "0";
+          ring.style.opacity = "0";
+        }, 1000);
+      }
+      document.addEventListener(
+        "touchstart",
+        (e) => {
+          const t = e.touches[0];
+          if (t) showCursorAt(t.clientX, t.clientY);
+        },
+        { passive: true },
+      );
+      document.addEventListener(
+        "touchmove",
+        (e) => {
+          const t = e.touches[0];
+          if (t) showCursorAt(t.clientX, t.clientY);
+        },
+        { passive: true },
+      );
+      
       (function loop() {
         rx += (mx - rx) * 0.14;
         ry += (my - ry) * 0.14;
