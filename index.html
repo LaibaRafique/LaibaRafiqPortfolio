@@ -2567,6 +2567,18 @@
         }),
       );
 
+      document.addEventListener("click", (e) => {
+          if (
+            nl.classList.contains("op") &&
+            !nl.contains(e.target) &&
+            !hbg.contains(e.target)
+          ) {
+            hbg.classList.remove("op");
+            nl.classList.remove("op");
+            hbg.setAttribute("aria-expanded", "false");
+          }
+      });
+
       /* ── Scroll-to-top ── */
       document
         .getElementById("topb")
