@@ -2254,6 +2254,26 @@
       </div>
     </div>
 
+    <!-- ===================== WIP MODAL ===================== -->
+    <div id="wipModal" class="modal">
+      <div
+        class="modal-content"
+        style="width:min(420px,90vw); padding:34px 28px; text-align:center;"
+      >
+        <button class="modal-close" id="wipModalClose">×</button>
+        <div style="font-size:2.4rem; margin-bottom:14px;">🚧</div>
+        <h3
+          style="font-family:var(--fhead); font-size:1.15rem; font-weight:700; margin-bottom:10px; color:var(--white);"
+        >
+          Work in Progress
+        </h3>
+        <p style="font-size:0.86rem; color:var(--gray); line-height:1.7;">
+          This repository is currently private while the project is under
+          active development.
+        </p>
+      </div>
+    </div>
+
     <script>
       /* ── DATA ── */
       const SKILLS = [
@@ -2358,6 +2378,7 @@
           d: "A full-stack event management platform built with Laravel and PHP, supporting three roles—System Admin, Community, and User—for event creation, collaboration, discovery, and engagement.",
           tags: ["Laravel", "PHP", "MySQL", "REST API", "Web Platform"],
           gh: "",
+          wip: true,
         },
         {
           e: "🤖",
@@ -2365,6 +2386,7 @@
           d: "A Django-based AI microservice enabling semantic search, event filtering, and personalized recommendations using embeddings and vector database integration.",
           tags: ["Python", "Django", "AI", "Embeddings", "Qdrant"],
           gh: "",
+          wip: true,
         },
         {
           e: "📄",
@@ -2507,7 +2529,10 @@
         (p) => `
   <article class="pjcard rv">
     <div class="pth"><div class="pgrid" aria-hidden="true"></div><span style="position:relative;z-index:1;" aria-hidden="true">${p.e}</span></div>
-    <div class="pbody"><h3>${p.t}</h3><p>${p.d}</p><div class="tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div><a href="${p.gh}" target="_blank" rel="noopener" class="btn btn-ghost" style="padding:8px 18px;font-size:.74rem;"><i class="fa-brands fa-github"></i>GitHub</a></div>
+    <div class="pbody"><h3>${p.t}</h3><p>${p.d}</p><div class="tags">${p.tags.map((t) => `<span class="tag">${t}</span>`).join("")}</div>
+    <a href="${p.wip ? "#" : p.gh}" ${p.wip ? `onclick="event.preventDefault(); showWipModal();"` : `target="_blank" rel="noopener"`} class="btn btn-ghost" style="padding:8px 18px;font-size:.74rem;">
+    <i class="fa-brands fa-github"></i>GitHub
+    </a></div>
   </article>`,
       ).join("");
 
@@ -2847,6 +2872,25 @@
           modalFiles = [];
         }
       });
+
+      /* ── WIP Modal ── */
+      const wipModal = document.getElementById("wipModal");
+      const wipModalClose = document.getElementById("wipModalClose");
+
+      function showWipModal() {
+        wipModal.classList.add("show");
+      }
+
+      wipModalClose.addEventListener("click", () => {
+        wipModal.classList.remove("show");
+      });
+
+      wipModal.addEventListener("click", (e) => {
+        if (e.target === wipModal) {
+          wipModal.classList.remove("show");
+        }
+      });
+      
     </script>
   </body>
 </html>
